@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LNXVEX</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <video id="bg-video" playsinline preload="metadata" muted loop>
+    <source src="background.mp4" type="video/mp4" />
+  </video>
+
+  <audio id="bg-audio" preload="metadata" loop>
+    <source src="background.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="overlay"></div>
+
+  <div class="snowflakes" id="snowflakes"></div>
+
+  <!-- Click to enter -->
+  <div class="enter-screen" id="enterScreen">
+    <span class="enter-text" id="enterText">WELCOME MY HELL</span>
+  </div>
+
+  <!-- Volume control -->
+  <div class="volume-wrapper" id="volumeWrapper">
+    <button class="mute-btn" id="muteBtn">
+      <i class="fa fa-volume-high" id="muteIcon"></i>
+    </button>
+    <div class="volume-slider-box" id="volumeSliderBox">
+      <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="100" />
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="main-layout">
+      <div class="column-left">
+        <div class="main-card transparent-main">
+          <div class="main-avatar">
+            <img src="minipfp.gif" alt="pfp" />
+          </div>
+          <div class="main-text">
+            <div class="main-name">
+              LNXFLOW
+              <span class="name-icons" aria-hidden="true">
+                <a href="https://github.com/lnxvex" target="_blank" title="GitHub @lnxvex" class="name-social github">
+                  <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.tiktok.com/@lnxvex" target="_blank" title="TikTok @lnxvex" class="name-social tiktok">
+                  <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://discord.com/users/lnxflow" target="_blank" title="Discord @lnxflow" class="name-social discord">
+                  <i class="fab fa-discord"></i>
+                </a>
+                <a href="https://t.me/lnxvex" target="_blank" title="Telegram @lnxvex" class="name-social telegram">
+                  <i class="fab fa-telegram"></i>
+                </a>
+              </span>
+            </div>
+            <div class="main-sub">unseen |</div>
+            <div class="main-roles">
+              <span id="roleText" class="role-text"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-row">
+          <div class="sub-card">
+            <div class="sub-avatar">
+              <img src="lnxvexbar.jpg" alt="LNXVEX" />
+            </div>
+            <div class="sub-text">
+              <div class="sub-name">LNXVEX</div>
+              <div class="sub-status">Last seen unknown</div>
+            </div>
+          </div>
+
+          <div class="server-card">
+            <div class="server-icon">
+              <img src="telegram.jpg" alt="Telegram" class="server-avatar" />
+            </div>
+            <div class="server-middle">
+              <div class="server-title">[AZ] LNXFLOW</div>
+              <div class="server-sub">Welcome my hell</div>
+            </div>
+            <a href="https://t.me/lnxflow" target="_blank" class="join-btn">Join</a>
+          </div>
+        </div>
+
+        <div class="views-inline">
+          <i class="fa fa-eye"></i>
+          <span id="viewCount">9.999</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Snowflakes
+    const snowContainer = document.getElementById('snowflakes');
+    const symbols = ['❅', '❆', '✦', '·'];
+    const snowCount = window.innerWidth < 600 ? 15 : 30;
+    for (let i = 0; i < snowCount; i++) {
+      const el = document.createElement('span');
+      el.className = 'snowflake';
+      el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.fontSize = (Math.random() * 0.8 + 0.5) + 'rem';
+      el.style.animationDuration = (Math.random() * 8 + 6) + 's';
+      el.style.animationDelay = (Math.random() * 10) + 's';
+      el.style.opacity = Math.random() * 0.5 + 0.3;
+      snowContainer.appendChild(el);
+    }
+
+    const video        = document.getElementById('bg-video');
+    const audio        = document.getElementById('bg-audio');
+    const enterScreen  = document.getElementById('enterScreen');
+    const enterText    = document.getElementById('enterText');
+    const muteBtn      = document.getElementById('muteBtn');
+    const muteIcon     = document.getElementById('muteIcon');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const sliderBox    = document.getElementById('volumeSliderBox');
+    const wrapper      = document.getElementById('volumeWrapper');
+
+    // Load saved audio settings
+    const savedVolume = localStorage.getItem('lnx_audio_volume');
+    const savedMuted  = localStorage.getItem('lnx_audio_muted');
+    let currentVolume = savedVolume !== null ? parseFloat(savedVolume) : 0.5;
+    let currentMuted  = savedMuted === 'true';
+    if (Number.isNaN(currentVolume)) currentVolume = 0.5;
+
+    audio.volume = currentVolume;
+    audio.muted  = currentMuted;
+    volumeSlider.value = Math.round(currentVolume * 100);
+
+    // Enter screen
+    enterScreen.addEventListener('click', () => {
+      video.play().catch(() => {});
+      audio.play().catch(() => {});
+
+      enterScreen.classList.add('hidden');
+      setTimeout(() => enterScreen.remove(), 700);
+    });
+
+    // Mute toggle (ikona tıklama)
+    muteBtn.addEventListener('click', () => {
+      audio.muted = !audio.muted;
+      localStorage.setItem('lnx_audio_muted', String(audio.muted));
+      updateIcon();
+    });
+
+    // Volume slider
+    volumeSlider.addEventListener('input', () => {
+      const val = parseFloat(volumeSlider.value) / 100;
+      audio.volume = val;
+      audio.muted = val === 0;
+      localStorage.setItem('lnx_audio_volume', String(val));
+      localStorage.setItem('lnx_audio_muted', String(audio.muted));
+      updateIcon();
+      updateSliderFill();
+    });
+
+    function updateIcon() {
+      const v = audio.volume;
+      if (audio.muted || v === 0) {
+        muteIcon.className = 'fa fa-volume-xmark';
+      } else if (v < 0.5) {
+        muteIcon.className = 'fa fa-volume-low';
+      } else {
+        muteIcon.className = 'fa fa-volume-high';
+      }
+    }
+
+    function updateSliderFill() {
+      const pct = volumeSlider.value + '%';
+      volumeSlider.style.setProperty('--fill', pct);
+    }
+
+    updateSliderFill();
+
+    // Hover: slider aç/kapat
+    let hideTimer;
+    wrapper.addEventListener('mouseenter', () => {
+      clearTimeout(hideTimer);
+      sliderBox.classList.add('open');
+    });
+    wrapper.addEventListener('mouseleave', () => {
+      hideTimer = setTimeout(() => sliderBox.classList.remove('open'), 300);
+    });
+
+    // Animated tab title
+    const base = 'LNXVEX';
+    let ti = 1;
+    let growing = true;
+    document.title = '@L';
+    setInterval(() => {
+      if (growing) {
+        ti++;
+        if (ti >= base.length) growing = false;
+      } else {
+        ti--;
+        if (ti <= 1) growing = true;
+      }
+      document.title = '@' + base.slice(0, ti);
+    }, 520);
+
+    // Rotating role text under LNXFLOW
+    const roles = [
+      'APK / CSS customer',
+      'AI-powered web designer',
+      'Welcome to my hell'
+    ];
+    const roleEl = document.getElementById('roleText');
+    let roleIndex = 0;
+
+    function updateRole() {
+      roleEl.textContent = roles[roleIndex];
+      roleIndex = (roleIndex + 1) % roles.length;
+    }
+
+    updateRole();
+    setInterval(updateRole, 4200);
+
+    // Typewriter effect for enter text
+    (function() {
+      const full = enterText.textContent;
+      let idx = 0;
+      enterText.textContent = '';
+      const typeInterval = setInterval(() => {
+        idx++;
+        enterText.textContent = full.slice(0, idx);
+        if (idx >= full.length) {
+          clearInterval(typeInterval);
+        }
+      }, 80);
+    })();
+
+    // Static view counter
+  </script>
+</body>
+</html>
