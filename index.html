@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LNXFLOW — 8 Ball Pool üçün hack loader. Ban yoxdur, zəmanətli paketlər." />
+  <title>LNXFLOW — 8 Ball Pool Loader</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true"></canvas>
+  <div class="bg-vignette" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--1" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--2" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--3" aria-hidden="true"></div>
+
+  <header class="header">
+    <a href="#top" class="brand js-ui-sound">
+      <span class="brand__text">LNXFLOW</span>
+    </a>
+    <nav class="header__actions" aria-label="Sürətli əlaqə">
+      <a class="btn btn--ghost btn--icon js-ui-sound" href="https://t.me/lnxflow" target="_blank" rel="noopener noreferrer" aria-label="Telegram kanalına keç">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+        Kanal
+      </a>
+      <a class="btn btn--ghost btn--icon js-ui-sound" href="https://wa.me/6283139053433" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ilə yaz">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.123 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero reveal">
+      <p class="hero__welcome">Salam, xoş gəlmisiniz</p>
+      <div class="hero__visual float-slow">
+        <h1 class="hero__mark">
+          <span class="hero__mark-part">LNX</span>
+          <span class="hero__mark-icon" aria-hidden="true">
+            <svg class="hero__mark-svg" viewBox="0 0 32 32" width="38" height="38" focusable="false">
+              <polygon points="16,2 28,9 28,23 16,30 4,23 4,9" fill="currentColor" />
+              <path
+                d="M10 16l4 4 8-8"
+                fill="none"
+                stroke="#f8fafc"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+          <span class="hero__mark-part">FLOW</span>
+        </h1>
+      </div>
+      <p class="hero__tagline">8 Ball Pool üçün etibarlı loader</p>
+      <div class="hero__intro">
+        <p class="hero__lead">
+          Burada satdığımız proqram <strong>100% ban riski daşımır</strong> və
+          <strong>zəmanət</strong> ilə təqdim olunur. Aşağıdan özünüzə uyğun paketi seçin.
+        </p>
+      </div>
+      <div class="hero__cta">
+        <a class="btn btn--primary js-ui-sound" href="https://t.me/lnxflow" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+          Telegrama qoşul
+        </a>
+        <a class="btn btn--outline js-ui-sound" href="https://wa.me/6283139053433" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.123 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </section>
+
+    <section class="section section--packages" aria-labelledby="standart-basliq">
+      <div class="section__head reveal reveal--delay-1">
+        <h2 id="standart-basliq" class="section__title">
+          Standart paketlər <span class="standart-tag">(Manuel Oynama)</span> <span class="dot-green" aria-hidden="true">🟢</span>
+        </h2>
+      </div>
+      <div class="packages">
+        <article class="card card--shine reveal-card" style="--i:0">
+          <div class="card__badge-wrap">
+            <img src="assets/logo.png" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <h3 class="card__name">1 günlük</h3>
+          <p class="card__price"><span class="card__amount">6</span> 💵</p>
+          <a class="card__buy js-ui-sound" href="https://t.me/lnxvex?text=Salam%2C%20%22Standart%20%E2%80%94%201%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+        <article class="card card--shine reveal-card" style="--i:1">
+          <div class="card__badge-wrap">
+            <img src="assets/logo.png" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <h3 class="card__name">7 günlük</h3>
+          <p class="card__price"><span class="card__amount">15</span> 💵</p>
+          <a class="card__buy js-ui-sound" href="https://t.me/lnxvex?text=Salam%2C%20%22Standart%20%E2%80%94%207%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+        <article class="card card--shine reveal-card" style="--i:2">
+          <div class="card__badge-wrap">
+            <img src="assets/logo.png" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <h3 class="card__name">15 günlük</h3>
+          <p class="card__price"><span class="card__amount">22</span> 💵</p>
+          <a class="card__buy js-ui-sound" href="https://t.me/lnxvex?text=Salam%2C%20%22Standart%20%E2%80%94%2015%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+        <article class="card card--shine reveal-card" style="--i:3">
+          <div class="card__badge-wrap">
+            <img src="assets/logo.png" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <h3 class="card__name">30 günlük</h3>
+          <p class="card__price"><span class="card__amount">34</span> 💵</p>
+          <a class="card__buy js-ui-sound" href="https://t.me/lnxvex?text=Salam%2C%20%22Standart%20%E2%80%94%2030%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section--premium" aria-labelledby="premium-basliq">
+      <div class="section__head reveal reveal--delay-2">
+        <h2 id="premium-basliq" class="section__title section__title--premium">
+          Premium Plan <span class="premium-tag">(Auto Play)</span> <span class="dot" aria-hidden="true">🔴</span>
+        </h2>
+        <p class="section__desc">Avtomatik oyun rejimi — yüksək səviyyəli təcrübə.</p>
+      </div>
+      <div class="packages">
+        <article class="card card--shine card--premium reveal-card" style="--i:0">
+          <div class="card__badge-wrap">
+            <img src="assets/logo.png" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <h3 class="card__name">1 günlük</h3>
+          <p class="card__price"><span class="card__amount">8</span> 💵</p>
+          <a class="card__buy js-ui-sound" href="https://t.me/lnxvex?text=Salam%2C%20%22Premium%20%28Auto%20Play%29%20%E2%80%94%201%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+        <article class="card card--shine card--premium reveal-card" style="--i:1">
+          <div class="card__badge-wrap">
+            <img src="assets/logo.png" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <h3 class="card__name">7 günlük</h3>
+          <p class="card__price"><span class="card__amount">18</span> 💵</p>
+          <a class="card__buy js-ui-sound" href="https://t.me/lnxvex?text=Salam%2C%20%22Premium%20%28Auto%20Play%29%20%E2%80%94%207%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+        <article class="card card--shine card--premium reveal-card" style="--i:2">
+          <div class="card__badge-wrap">
+            <img src="assets/logo.png" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <h3 class="card__name">15 günlük</h3>
+          <p class="card__price"><span class="card__amount">28</span> 💵</p>
+          <a class="card__buy js-ui-sound" href="https://t.me/lnxvex?text=Salam%2C%20%22Premium%20%28Auto%20Play%29%20%E2%80%94%2015%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+        <article class="card card--shine card--premium reveal-card" style="--i:3">
+          <div class="card__badge-wrap">
+            <img src="assets/logo.png" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <h3 class="card__name">30 günlük</h3>
+          <p class="card__price"><span class="card__amount">42</span> 💵</p>
+          <a class="card__buy js-ui-sound" href="https://t.me/lnxvex?text=Salam%2C%20%22Premium%20%28Auto%20Play%29%20%E2%80%94%2030%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer reveal">
+    <p class="footer__note">© King of Shots — LJJ X PRINCE. Bütün hüquqlar saxlanılır.</p>
+    <div class="footer__links">
+      <a class="js-ui-sound" href="https://t.me/lnxvex" target="_blank" rel="noopener noreferrer">@lnxvex</a>
+      <span class="footer__sep">·</span>
+      <a class="js-ui-sound" href="https://t.me/lnxflow" target="_blank" rel="noopener noreferrer">@lnxflow</a>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      function observeReveal(selector, className) {
+        var nodes = document.querySelectorAll(selector);
+        if (!('IntersectionObserver' in window)) {
+          nodes.forEach(function (el) { el.classList.add(className); });
+          return;
+        }
+        var obs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) e.target.classList.add(className);
+            });
+          },
+          { threshold: 0.08, rootMargin: '0px 0px -8% 0px' }
+        );
+        nodes.forEach(function (el) { obs.observe(el); });
+      }
+
+      observeReveal('.reveal', 'reveal--visible');
+      observeReveal('.reveal-card', 'reveal-card--visible');
+
+      /* Dərin klik səsi (Web Audio) */
+      var audioCtx = null;
+      function playDeepThump() {
+        try {
+          var AC = window.AudioContext || window.webkitAudioContext;
+          if (!AC) return;
+          if (!audioCtx) audioCtx = new AC();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+
+          var t = audioCtx.currentTime;
+          var osc = audioCtx.createOscillator();
+          var osc2 = audioCtx.createOscillator();
+          var gain = audioCtx.createGain();
+          var filter = audioCtx.createBiquadFilter();
+
+          osc.type = 'sine';
+          osc2.type = 'sine';
+          osc.frequency.setValueAtTime(58, t);
+          osc.frequency.exponentialRampToValueAtTime(38, t + 0.14);
+          osc2.frequency.setValueAtTime(116, t);
+          osc2.frequency.exponentialRampToValueAtTime(52, t + 0.14);
+
+          filter.type = 'lowpass';
+          filter.Q.value = 0.7;
+          filter.frequency.setValueAtTime(320, t);
+
+          gain.gain.setValueAtTime(0, t);
+          gain.gain.linearRampToValueAtTime(0.2, t + 0.004);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+
+          osc.connect(filter);
+          osc2.connect(filter);
+          filter.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          osc.start(t);
+          osc2.start(t);
+          osc.stop(t + 0.25);
+          osc2.stop(t + 0.25);
+        } catch (err) {}
+      }
+
+      document.addEventListener(
+        'click',
+        function (e) {
+          if (e.target.closest('.js-ui-sound')) {
+            playDeepThump();
+          }
+        },
+        true
+      );
+    })();
+  </script>
+  <script src="bg-canvas.js"></script>
+</body>
+</html>
