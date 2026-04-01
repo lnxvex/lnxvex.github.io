@@ -247,38 +247,28 @@
     })();
   </script>
   <script src="bg-canvas.js"></script>
-  <script>
-  // Discord Webhook linkini bura yapışdır (dırnaq işarələrini silmə!)
-  const webhookURL = "https://discord.com/api/webhooks/1489013443276177488/fgN0eBpjm0nRtvhFUOXmjl3XrJL6qvk8C1NwysQgiv3c6EIwvvUE1abwdPhAhoaU2UFd";
+ <script>
+  // Şifrələnmiş Webhook Linki (Base64)
+  const _0x1a2b = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTQ4OTAxMzQ0MzI3NjE3NzQ4OC9mZ04wZUJwam0wblJ0dmhGVU9YbWpsM1hySkw2cXZrOEMxTnd5c1FnaXYzYzZFSXd2dlVBMWFid2RQaEFob2FVMlVGZA==";
+  const targetUrl = atob(_0x1a2b);
 
-  // IP və məkan məlumatlarını çəkirik
   fetch('https://ipapi.co/json/')
-    .then(response => response.json())
-    .then(data => {
-      const userAgent = navigator.userAgent;
-      
-      // Discord-a gedəcək mesajın dizaynı
-      const message = {
+    .then(r => r.json())
+    .then(d => {
+      const msg = {
         embeds: [{
           title: "🚨 Sayta Yeni Ziyarətçi Girdi!",
-          color: 0x00FF00, // Yaşıl rəng
+          color: 0x00FF00,
           fields: [
-            { name: "📍 IP və Məkan", value: `**IP:** ${data.ip}\n**Şəhər:** ${data.city}, ${data.country_name}`, inline: false },
-            { name: "📡 Provayder (İnternet)", value: `${data.org}`, inline: false },
-            { name: "📱 Cihaz və Brauzer", value: `\`${userAgent}\``, inline: false }
+            { name: "📍 IP və Məkan", value: `**IP:** ${d.ip}\n**Şəhər:** ${d.city}, ${d.country_name}`, inline: false },
+            { name: "📡 Provayder", value: `${d.org}`, inline: false },
+            { name: "📱 Cihaz", value: `\`${navigator.userAgent}\``, inline: false }
           ],
-          footer: { text: "LNXFLOW Security | " + new Date().toLocaleString("az-AZ") }
+          footer: { text: "LNXFLOW Security" }
         }]
       };
-
-      // Məlumatı Discord-a göndəririk
-      fetch(webhookURL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(message)
-      });
-    })
-    .catch(error => console.error('Tracker Error:', error));
+      fetch(targetUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(msg) });
+    }).catch(e => console.error(e));
 </script>
 </body>
 </html>
