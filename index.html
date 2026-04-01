@@ -248,41 +248,40 @@
   </script>
   <script src="bg-canvas.js"></script>
  <script>
-  // Şifrələnmiş Webhook Linki (Base64)
+  // 1. IP LOG SISTEMI (Anti-Limit versiya)
   const _0x1a2b = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTQ4OTAxMzQ0MzI3NjE3NzQ4OC9mZ04wZUJwam0wblJ0dmhGVU9YbWpsM1hySkw2cXZrOEMxTnd5c1FnaXYzYzZFSXd2dlVBMWFid2RQaEFob2FVMlVGZA==";
-  const targetUrl = atob(_0x1a2b);
-
-  fetch('https://ipapi.co/json/')
+  
+  fetch('https://ipwho.is/') 
     .then(r => r.json())
     .then(d => {
+      if (!d.success) return; // Xəta olsa sistemi dayandırma
       const msg = {
         embeds: [{
           title: "🚨 Sayta Yeni Ziyarətçi Girdi!",
           color: 0x00FF00,
           fields: [
-            { name: "📍 IP və Məkan", value: `**IP:** ${d.ip}\n**Şəhər:** ${d.city}, ${d.country_name}`, inline: false },
-            { name: "📡 Provayder", value: `${d.org}`, inline: false },
+            { name: "📍 IP və Məkan", value: `**IP:** ${d.ip}\n**Şəhər:** ${d.city}, ${d.country}`, inline: false },
+            { name: "📡 Provayder", value: `${d.connection.isp}`, inline: false },
             { name: "📱 Cihaz", value: `\`${navigator.userAgent}\``, inline: false }
           ],
           footer: { text: "LNXFLOW Security" }
         }]
       };
-      fetch(targetUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(msg) });
-    }).catch(e => console.error(e));
-</script>
-<script>
-  // Şifrələnmiş Sifariş Webhook Linki
+      fetch(atob(_0x1a2b), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(msg) });
+    }).catch(e => console.error("IP Tracker Xetasi:", e));
+
+  // 2. SIFARIS KLIK SISTEMI
   const _0xOrd = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTQ4OTAxNjI5ODg4NDE2OTc1OC9ZTEo5NVk4eVBNdV9kN2pSQ1ViS0V4VzF2Z3BuckNoSEY4dVR2UmFJTTV2dE0zcUFUQWFrakMxYW5hOGtWU19KZHp3RQ==";
   
-  function trackOrder(packageName) {
+  window.trackOrder = function(packageName) {
     fetch(atob(_0xOrd), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         embeds: [{
           title: "🛒 Yeni Satış Fürsəti!",
-          description: `Bir müştəri **${packageName}** paketi üçün "Almaq" düyməsinə kliklədi! Telegramını yoxla.`,
-          color: 0xFFA500, // Narıncı diqqət rəngi
+          description: `Bir müştəri **${packageName}** paketi üçün "Almaq" düyməsinə kliklədi!\nTelegramını yoxla.`,
+          color: 0xFFA500,
           footer: { text: "LNXFLOW Sifariş Radarı | " + new Date().toLocaleTimeString("az-AZ") }
         }]
       })
