@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LNXFLOW — 8 Ball Pool üçün hack loader. Ban yoxdur, zəmanətli paketlər." />
+  <title>LNXFLOW — 8 Ball Pool Loader</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true"></canvas>
+  <div class="bg-vignette" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--1" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--2" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--3" aria-hidden="true"></div>
+
+  <div class="consent" id="consent" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+    <div class="consent__card reveal-card reveal-card--visible" style="--i:0">
+      <div class="consent__badge" aria-hidden="true">🔒 Bildiriş</div>
+      <h2 class="consent__title" id="consent-title">Sayta xoş gəlmisiniz</h2>
+      <p class="consent__text">
+        Bu veb-saytda təqdim olunan xidmət və məlumatlar <strong>qanunvericiliyə uyğun</strong> formada paylaşılır.
+        Burada <strong>qanunsuz</strong> fəaliyyət, təşviq və ya yönləndirmə nəzərdə tutulmur.
+      </p>
+      <p class="consent__text">
+        İstifadəçi, xidmətlərdən <strong>məsuliyyətli</strong> şəkildə istifadə etməyi qəbul edir.
+        Xidmətin üçüncü şəxslər tərəfindən <strong>pis niyyətlə</strong> istifadəsinə görə məsuliyyət daşımırıq.
+      </p>
+      <p class="consent__meta">Davam etməklə şərtlərlə tanış olduğunuzu təsdiqləyirsiniz.</p>
+      <button class="btn btn--primary consent__btn js-ui-sound" id="consent-accept" type="button">Qəbul edirəm və davam et</button>
+    </div>
+  </div>
+
+  <header class="header">
+    <a href="#top" class="brand js-ui-sound">
+      <span class="brand__text">LNXFLOW</span>
+    </a>
+    <nav class="header__nav" aria-label="Bölmə naviqasiyası">
+      <a class="header__nav-link js-ui-sound" href="#paketler">Paketlər</a>
+      <a class="header__nav-link js-ui-sound" href="#process-basliq">Proses</a>
+      <a class="header__nav-link js-ui-sound" href="#faq-basliq">FAQ</a>
+    </nav>
+    <nav class="header__actions" aria-label="Sürətli əlaqə">
+      <a class="btn btn--ghost btn--icon js-ui-sound" href="https://t.me/lnxflow" target="_blank" rel="noopener noreferrer" aria-label="Telegram kanalına keç">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+        Kanal
+      </a>
+      <a class="btn btn--ghost btn--icon js-ui-sound" href="https://wa.me/6283139053433" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ilə yaz">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.123 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero hero--premium reveal">
+      <div class="hero__layout">
+        <div class="hero__content">
+          <p class="hero__eyebrow">Premium Telegram xidmətləri</p>
+          <div class="hero__visual float-slow">
+            <h1 class="hero__mark">
+              <span class="hero__mark-part">LNX</span>
+              <span class="hero__mark-icon" aria-hidden="true">
+                <svg class="hero__mark-svg" viewBox="0 0 32 32" width="38" height="38" focusable="false">
+                  <polygon points="16,2 28,9 28,23 16,30 4,23 4,9" fill="currentColor" />
+                  <path
+                    d="M10 16l4 4 8-8"
+                    fill="none"
+                    stroke="#f8fafc"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+              <span class="hero__mark-part">FLOW</span>
+            </h1>
+          </div>
+          <h2 class="hero__headline">Peşəkar xidmət, sürətli sifariş və premium təqdimat</h2>
+          <p class="hero__lead hero__lead--wide">
+            Bütün paketlər aydın qiymətlərlə təqdim olunur. Məqsədimiz sürətli əlaqə, rahat seçim və
+            Telegram üzərindən peşəkar xidmət təcrübəsi yaratmaqdır.
+          </p>
+          <div class="hero__cta hero__cta--stack">
+            <a class="btn btn--primary js-ui-sound" href="#paketler">
+              Paketlərə bax
+            </a>
+            <a class="btn btn--ghost js-ui-sound" href="https://t.me/lnxvex" target="_blank" rel="noopener noreferrer">
+              Telegram ilə sifariş et
+            </a>
+          </div>
+          <div class="hero__trustbar">
+            <span class="hero__trustpill">24/7 cavab</span>
+            <span class="hero__trustpill">Aydın qiymətlər</span>
+            <span class="hero__trustpill">Premium təqdimat</span>
+          </div>
+        </div>
+        <aside class="hero__panel reveal-card" style="--i:1">
+          <div class="hero__panel-top">
+            <span class="hero__panel-label">LNXFLOW CONTROL</span>
+            <span class="hero__panel-status">ONLINE</span>
+          </div>
+          <div class="hero__stats">
+            <div class="hero__stat">
+              <span class="hero__stat-value">3</span>
+              <span class="hero__stat-label">Paket xətti</span>
+            </div>
+            <div class="hero__stat">
+              <span class="hero__stat-value">24/7</span>
+              <span class="hero__stat-label">Dəstək</span>
+            </div>
+            <div class="hero__stat">
+              <span class="hero__stat-value">Fast</span>
+              <span class="hero__stat-label">Sifariş axını</span>
+            </div>
+          </div>
+          <div class="hero__stack">
+            <div class="hero__stack-card">
+              <span class="hero__stack-title">KOS LOADER STANDART</span>
+              <span class="hero__stack-text">Uyğun qiymətli gündəlik seçimlər</span>
+            </div>
+            <div class="hero__stack-card hero__stack-card--premium">
+              <span class="hero__stack-title">KOS LOADER PREMIUM</span>
+              <span class="hero__stack-text">Yüksək təcrübəli premium paketlər</span>
+            </div>
+            <div class="hero__stack-card hero__stack-card--wizard">
+              <span class="hero__stack-title">iOS WIZARD</span>
+              <span class="hero__stack-text">iOS üçün xüsusi sürətli seçimlər</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="showcase reveal reveal--delay-1">
+      <div class="showcase__grid">
+        <article class="showcase__item reveal-card" style="--i:0">
+          <span class="showcase__icon">⚡</span>
+          <h3 class="showcase__title">Sürətli cavab</h3>
+          <p class="showcase__text">Sifariş zamanı istifadəçi qarışmasın deyə bütün axın sadə və aydın qurulub.</p>
+        </article>
+        <article class="showcase__item reveal-card" style="--i:1">
+          <span class="showcase__icon">🛡️</span>
+          <h3 class="showcase__title">Etibarlı təqdimat</h3>
+          <p class="showcase__text">Qiymətlər, paket fərqləri və əlaqə nöqtələri premium formatda göstərilir.</p>
+        </article>
+        <article class="showcase__item reveal-card" style="--i:2">
+          <span class="showcase__icon">🎯</span>
+          <h3 class="showcase__title">Konversiya fokuslu</h3>
+          <p class="showcase__text">İstifadəçi bir neçə kliklə uyğun paketi seçib birbaşa Telegrama keçə bilir.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section--signal reveal" id="paketler">
+      <div class="section__head section__head--wide reveal reveal--delay-1">
+        <h2 class="section__mega">Paket seç, əlaqəyə keç və sifarişi tamamla</h2>
+        <p class="section__submega">Bütün paketlər peşəkar təqdimat, aydın fərqləndirmə və sürətli keçid üçün strukturlaşdırılıb.</p>
+      </div>
+    </section>
+
+    <section class="section section--packages" aria-labelledby="standart-basliq">
+      <div class="section__head reveal reveal--delay-1">
+        <h2 id="standart-basliq" class="section__title section__title--standard">
+          KOS LOADER STANDART <span class="standart-tag">(Manual Oynama)</span> <span class="dot-green" aria-hidden="true">🟢</span>
+        </h2>
+        <p class="section__desc section__desc--standard">Uyğun qiymətli standart paketlər</p>
+      </div>
+      <div class="packages">
+        <article class="card card--shine reveal-card" style="--i:0">
+          <div class="card__badge-wrap">
+            <img src="assets/logo.png" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <h3 class="card__name">1 günlük</h3>
+          <p class="card__price"><span class="card__amount">6</span> 💵</p>
+          <a class="card__buy js-ui-sound" data-package="Standart — 1 günlük" href="https://t.me/lnxvex?text=Salam%2C%20%22Standart%20%E2%80%94%201%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+        <article class="card card--shine reveal-card card--popular" style="--i:1">
+          <div class="card__badge-wrap">
+            <img src="assets/logo.png" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <span class="card__flag">Populyar seçim</span>
+          <h3 class="card__name">7 günlük</h3>
+          <p class="card__price"><span class="card__amount">15</span> 💵</p>
+          <a class="card__buy js-ui-sound" data-package="Standart — 7 günlük" href="https://t.me/lnxvex?text=Salam%2C%20%22Standart%20%E2%80%94%207%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+        <article class="card card--shine reveal-card" style="--i:2">
+          <div class="card__badge-wrap">
+            <img src="assets/logo.png" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <h3 class="card__name">15 günlük</h3>
+          <p class="card__price"><span class="card__amount">22</span> 💵</p>
+          <a class="card__buy js-ui-sound" data-package="Standart — 15 günlük" href="https://t.me/lnxvex?text=Salam%2C%20%22Standart%20%E2%80%94%2015%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+        <article class="card card--shine reveal-card" style="--i:3">
+          <div class="card__badge-wrap">
+            <img src="assets/logo.png" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <h3 class="card__name">30 günlük</h3>
+          <p class="card__price"><span class="card__amount">34</span> 💵</p>
+          <a class="card__buy js-ui-sound" data-package="Standart — 30 günlük" href="https://t.me/lnxvex?text=Salam%2C%20%22Standart%20%E2%80%94%2030%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section--premium" aria-labelledby="premium-basliq">
+      <div class="section__head reveal reveal--delay-2">
+        <h2 id="premium-basliq" class="section__title section__title--premium section__title--premium-glow">
+          KOS LOADER PREMIUM <span class="premium-tag">(Auto Play)</span> <span class="dot" aria-hidden="true">🔴</span>
+        </h2>
+        <p class="section__desc section__desc--premium">Yüksək təcrübəli premium paketlər</p>
+      </div>
+      <div class="packages">
+        <article class="card card--shine card--premium reveal-card" style="--i:0">
+          <div class="card__badge-wrap">
+            <img src="assets/logo.png" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <h3 class="card__name">1 günlük</h3>
+          <p class="card__price"><span class="card__amount">8</span> 💵</p>
+          <a class="card__buy js-ui-sound" data-package="Premium (Auto Play) — 1 günlük" href="https://t.me/lnxvex?text=Salam%2C%20%22Premium%20%28Auto%20Play%29%20%E2%80%94%201%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+        <article class="card card--shine card--premium reveal-card" style="--i:1">
+          <div class="card__badge-wrap">
+            <img src="assets/logo.png" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <h3 class="card__name">7 günlük</h3>
+          <p class="card__price"><span class="card__amount">18</span> 💵</p>
+          <a class="card__buy js-ui-sound" data-package="Premium (Auto Play) — 7 günlük" href="https://t.me/lnxvex?text=Salam%2C%20%22Premium%20%28Auto%20Play%29%20%E2%80%94%207%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+        <article class="card card--shine card--premium reveal-card card--popular" style="--i:2">
+          <div class="card__badge-wrap">
+            <img src="assets/logo.png" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <span class="card__flag card__flag--premium">Tövsiyə olunur</span>
+          <h3 class="card__name">15 günlük</h3>
+          <p class="card__price"><span class="card__amount">28</span> 💵</p>
+          <a class="card__buy js-ui-sound" data-package="Premium (Auto Play) — 15 günlük" href="https://t.me/lnxvex?text=Salam%2C%20%22Premium%20%28Auto%20Play%29%20%E2%80%94%2015%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+        <article class="card card--shine card--premium reveal-card" style="--i:3">
+          <div class="card__badge-wrap">
+            <img src="assets/logo.png" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <h3 class="card__name">30 günlük</h3>
+          <p class="card__price"><span class="card__amount">42</span> 💵</p>
+          <a class="card__buy js-ui-sound" data-package="Premium (Auto Play) — 30 günlük" href="https://t.me/lnxvex?text=Salam%2C%20%22Premium%20%28Auto%20Play%29%20%E2%80%94%2030%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section--wizard" aria-labelledby="wizard-basliq">
+      <div class="section__head reveal reveal--delay-2">
+        <h2 id="wizard-basliq" class="section__title section__title--wizard">
+          iOS Wizard paketləri
+        </h2>
+        <p class="section__desc section__desc--wizard">iOS üçün xüsusi paketlər — sürətli və rahat seçimlər.</p>
+      </div>
+      <div class="packages packages--3">
+        <article class="card card--shine reveal-card" style="--i:0">
+          <div class="card__badge-wrap">
+            <img src="assets/wizard.jpg" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <h3 class="card__name">1 günlük</h3>
+          <p class="card__price"><span class="card__amount">12</span> 💵</p>
+          <a class="card__buy js-ui-sound" data-package="iOS Wizard — 1 günlük" href="https://t.me/lnxvex?text=Salam%2C%20%22iOS%20Wizard%20%E2%80%94%201%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+        <article class="card card--shine reveal-card card--popular" style="--i:1">
+          <div class="card__badge-wrap">
+            <img src="assets/wizard.jpg" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <span class="card__flag card__flag--wizard">Ən sərfəli balans</span>
+          <h3 class="card__name">7 günlük</h3>
+          <p class="card__price"><span class="card__amount">35</span> 💵</p>
+          <a class="card__buy js-ui-sound" data-package="iOS Wizard — 7 günlük" href="https://t.me/lnxvex?text=Salam%2C%20%22iOS%20Wizard%20%E2%80%94%207%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+        <article class="card card--shine reveal-card" style="--i:2">
+          <div class="card__badge-wrap">
+            <img src="assets/wizard.jpg" alt="" class="card__mini-logo" width="56" height="56" />
+          </div>
+          <h3 class="card__name">30 günlük</h3>
+          <p class="card__price"><span class="card__amount">65</span> 💵</p>
+          <a class="card__buy js-ui-sound" data-package="iOS Wizard — 30 günlük" href="https://t.me/lnxvex?text=Salam%2C%20%22iOS%20Wizard%20%E2%80%94%2030%20g%C3%BCnl%C3%BCk%22%20paketini%20almaq%20ist%C9%99yir%C9%99m." target="_blank" rel="noopener noreferrer">Almaq üçün klikləyin</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section process reveal" aria-labelledby="process-basliq">
+      <div class="section__head section__head--wide reveal reveal--delay-1">
+        <h2 id="process-basliq" class="section__mega">Sifariş prosesi maksimum sadədir</h2>
+        <p class="section__submega">İstifadəçi üçün bütün axın 3 addımda tamamlanır.</p>
+      </div>
+      <div class="process__grid">
+        <article class="process__step reveal-card" style="--i:0">
+          <span class="process__count">01</span>
+          <h3 class="process__title">Paket seç</h3>
+          <p class="process__text">Özünə uyğun Standard, Premium və ya iOS Wizard paketini müəyyənləşdir.</p>
+        </article>
+        <article class="process__step reveal-card" style="--i:1">
+          <span class="process__count">02</span>
+          <h3 class="process__title">Telegrama keç</h3>
+          <p class="process__text">“Almaq üçün klikləyin” düyməsi ilə hazır mesaj formatında birbaşa əlaqəyə keç.</p>
+        </article>
+        <article class="process__step reveal-card" style="--i:2">
+          <span class="process__count">03</span>
+          <h3 class="process__title">Sifarişi tamamla</h3>
+          <p class="process__text">Qısa əlaqədən sonra sifarişin tamamlanır və proses sürətli şəkildə davam edir.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section faq reveal" aria-labelledby="faq-basliq">
+      <div class="section__head section__head--wide reveal reveal--delay-1">
+        <h2 id="faq-basliq" class="section__mega">Tez-tez verilən suallar</h2>
+        <p class="section__submega">Alıcıların ən çox verdiyi sualları bir yerdə topladıq.</p>
+      </div>
+      <div class="faq__list">
+        <details class="faq__item reveal-card" style="--i:0">
+          <summary class="faq__question">Sifariş necə verilir?</summary>
+          <p class="faq__answer">İstədiyin paketin “Almaq üçün klikləyin” düyməsinə toxunursan və birbaşa Telegram üzərindən əlaqəyə keçirsən.</p>
+        </details>
+        <details class="faq__item reveal-card" style="--i:1">
+          <summary class="faq__question">Hansı paket mənə uyğundur?</summary>
+          <p class="faq__answer">Uyğun qiymət və sadə seçim üçün Standard, daha yüksək səviyyə üçün Premium, iOS cihazları üçün isə iOS Wizard bölməsi uyğundur.</p>
+        </details>
+        <details class="faq__item reveal-card" style="--i:2">
+          <summary class="faq__question">Əlaqə kanalı hansıdır?</summary>
+          <p class="faq__answer">Əsas sifariş və əlaqə nöqtəsi Telegram-dır. Lazım olduqda WhatsApp keçidi də mövcuddur.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="section cta-banner reveal">
+      <div class="cta-banner__box reveal-card" style="--i:0">
+        <div>
+          <p class="cta-banner__eyebrow">Premium əlaqə axını</p>
+          <h2 class="cta-banner__title">Uyğun paketi seç və Telegram üzərindən birbaşa sifariş et</h2>
+        </div>
+        <div class="cta-banner__actions">
+          <a class="btn btn--primary js-ui-sound" href="https://t.me/lnxvex" target="_blank" rel="noopener noreferrer">Telegram sifariş</a>
+          <a class="btn btn--ghost js-ui-sound" href="#paketler">Paketlərə qayıt</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer reveal">
+    <div class="footer__grid">
+      <div class="footer__info">
+        <p class="footer__brand">LNXFLOW</p>
+        <p class="footer__note">Premium təqdimat, sürətli əlaqə və peşəkar sifariş təcrübəsi.</p>
+        <p class="footer__rights">© 2026 LNXFLOW — Bütün hüquqlar qorunur.</p>
+      </div>
+      <div class="footer__links">
+        <a class="js-ui-sound" href="https://t.me/lnxvex" target="_blank" rel="noopener noreferrer">@lnxvex</a>
+        <span class="footer__sep">·</span>
+        <a class="js-ui-sound" href="https://t.me/lnxflow" target="_blank" rel="noopener noreferrer">@lnxflow</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="mobile-cta js-ui-sound" href="https://t.me/lnxvex" target="_blank" rel="noopener noreferrer">
+    Telegram ilə sifariş et
+  </a>
+
+  <script>
+    (function () {
+      function observeReveal(selector, className) {
+        var nodes = document.querySelectorAll(selector);
+        if (!('IntersectionObserver' in window)) {
+          nodes.forEach(function (el) { el.classList.add(className); });
+          return;
+        }
+        var obs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) e.target.classList.add(className);
+            });
+          },
+          { threshold: 0.08, rootMargin: '0px 0px -8% 0px' }
+        );
+        nodes.forEach(function (el) { obs.observe(el); });
+      }
+
+      observeReveal('.reveal', 'reveal--visible');
+      observeReveal('.reveal-card', 'reveal-card--visible');
+
+      /* Dərin klik səsi (Web Audio) */
+      var audioCtx = null;
+      function playDeepThump() {
+        try {
+          var AC = window.AudioContext || window.webkitAudioContext;
+          if (!AC) return;
+          if (!audioCtx) audioCtx = new AC();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+
+          var t = audioCtx.currentTime;
+          var osc = audioCtx.createOscillator();
+          var osc2 = audioCtx.createOscillator();
+          var gain = audioCtx.createGain();
+          var filter = audioCtx.createBiquadFilter();
+
+          osc.type = 'sine';
+          osc2.type = 'sine';
+          osc.frequency.setValueAtTime(58, t);
+          osc.frequency.exponentialRampToValueAtTime(38, t + 0.14);
+          osc2.frequency.setValueAtTime(116, t);
+          osc2.frequency.exponentialRampToValueAtTime(52, t + 0.14);
+
+          filter.type = 'lowpass';
+          filter.Q.value = 0.7;
+          filter.frequency.setValueAtTime(320, t);
+
+          gain.gain.setValueAtTime(0, t);
+          gain.gain.linearRampToValueAtTime(0.2, t + 0.004);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+
+          osc.connect(filter);
+          osc2.connect(filter);
+          filter.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          osc.start(t);
+          osc2.start(t);
+          osc.stop(t + 0.25);
+          osc2.stop(t + 0.25);
+        } catch (err) {}
+      }
+
+      document.addEventListener(
+        'click',
+        function (e) {
+          if (e.target.closest('.js-ui-sound')) {
+            playDeepThump();
+          }
+        },
+        true
+      );
+    })();
+  </script>
+  <script>
+    (function () {
+      var CONSENT_KEY = "lnxflow_consent_v3";
+      var CONSENT_SESSION_KEY = "lnxflow_consent_session_v1";
+      var consentEl = document.getElementById("consent");
+      var acceptBtn = document.getElementById("consent-accept");
+
+      if (!consentEl || !acceptBtn) return;
+
+      var audio = null;
+      function startMusic() {
+        try {
+          if (!audio) {
+            audio = new Audio("assets/back.mp3");
+            audio.loop = true;
+            audio.volume = 0.14;
+          }
+          var p = audio.play();
+          if (p && typeof p.catch === "function") p.catch(function () {});
+        } catch (err) {}
+      }
+
+      function hideConsent() {
+        consentEl.classList.add("consent--hide");
+        setTimeout(function () {
+          consentEl.setAttribute("hidden", "");
+        }, 420);
+      }
+
+      var accepted = false;
+      var sessionAccepted = false;
+      try {
+        accepted = localStorage.getItem(CONSENT_KEY) === "1";
+      } catch (err) {}
+      try {
+        sessionAccepted = sessionStorage.getItem(CONSENT_SESSION_KEY) === "1";
+      } catch (err) {}
+
+      if (accepted && sessionAccepted) {
+        consentEl.setAttribute("hidden", "");
+        return;
+      }
+
+      consentEl.removeAttribute("hidden");
+      document.documentElement.classList.add("has-consent-modal");
+
+      acceptBtn.addEventListener("click", function () {
+        try {
+          localStorage.setItem(CONSENT_KEY, "1");
+        } catch (err) {}
+        try {
+          sessionStorage.setItem(CONSENT_SESSION_KEY, "1");
+        } catch (err) {}
+        document.documentElement.classList.remove("has-consent-modal");
+        hideConsent();
+        startMusic();
+      });
+
+      consentEl.addEventListener("click", function (e) {
+        if (e.target === consentEl) {
+          acceptBtn.focus();
+        }
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          acceptBtn.focus();
+        }
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      var WORKER_EVENT_URL = "https://cool-sunset-dbcd.muratxws1.workers.dev/event";
+
+      function postEvent(body) {
+        try {
+          if (!WORKER_EVENT_URL || WORKER_EVENT_URL.indexOf("https://") !== 0) return;
+          fetch(WORKER_EVENT_URL, {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(body),
+            keepalive: true
+          }).catch(function () {});
+        } catch (err) {}
+      }
+
+      postEvent({ type: "visit" });
+
+      document.addEventListener(
+        "click",
+        function (e) {
+          var a = e.target.closest("a.card__buy");
+          if (!a) return;
+          var pkg = a.getAttribute("data-package") || "";
+          postEvent({ type: "buy_click", package: pkg });
+        },
+        true
+      );
+    })();
+  </script>
+  <script src="bg-canvas.js"></script>
+</body>
+</html>
